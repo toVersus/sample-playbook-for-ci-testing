@@ -1,0 +1,28 @@
+---
+language: python
+
+cache:
+  directories:
+    - ~/virtualenv/python2.7.*
+
+sudo: required
+dist: xenial
+
+service:
+  - docker
+
+python: "2.7"
+
+env:
+  - PIPENV_VERBOSITY=-1
+
+before_install:
+  - sudo apt-get update
+  - pip install pipenv
+  - pipenv run pip install pip==18.0
+
+install:
+  - pipenv sync
+
+script:
+  - pipenv run test

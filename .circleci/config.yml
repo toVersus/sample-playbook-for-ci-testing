@@ -1,0 +1,29 @@
+---
+version: 2
+
+CACHE_KEY: 'sample-v1-{{ checksum "Pipfile.lock" }}'
+
+jobs:
+  build:
+    machine: yes
+    working_directory: ~/sample-role-for-ci-testing
+    environment:
+      PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: CACHE_KEY
+
+      - run:
+          command: |
+            pip install pipenv
+            pipenv sync
+
+      - save_cache:
+          key: CACHE_KEY
+          paths:
+            - ".venv"
+
+      - run:
+          command: pipenv run test

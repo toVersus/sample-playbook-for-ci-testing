@@ -1,0 +1,26 @@
+---
+version: 1.0.{build}
+
+image: ubuntu
+
+stack: python 2.7
+
+services:
+  - docker
+
+clone_folder: /home/appveyor/projects/sample-role-for-ci-testing
+
+environment:
+  PIPENV_VERBOSITY: -1
+
+cache:
+  - /home/appveyor/venv2.7.* -> Pipfile.lock
+
+install:
+  - pip install pipenv
+  - pipenv sync
+
+test_script:
+  - pipenv run test
+
+build: off

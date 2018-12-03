@@ -1,0 +1,52 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: instance-1
+    groups:
+      - dbservers
+    image: centos:6
+    capabilities:
+      - SYS_ADMIN
+    command: /sbin/init
+  - name: instance-2
+    groups:
+      - webservers
+    image: centos:6
+    capabilities:
+      - SYS_ADMIN
+    command: /sbin/init
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      group_vars: ../../group_vars
+  playbooks:
+    converge: ../../site.yml
+  config_options:
+    diff:
+      always: true
+  lint:
+    name: ansible-lint
+    options:
+      L: true
+      force-color: true
+scenario:
+  name: default
+  check_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - check
+    - destroy
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
