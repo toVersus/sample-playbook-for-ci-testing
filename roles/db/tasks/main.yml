@@ -21,10 +21,6 @@
 - name: Start Mysql Service
   service: name=mysqld state=started enabled=yes
 
-- name: insert iptables rule
-  template: src=iptables.j2 dest=/etc/sysconfig/iptables
-  notify: restart iptables
-
 - name: Create Application Database
   mysql_db: name={{ dbname }} state=present
 
