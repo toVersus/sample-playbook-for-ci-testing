@@ -11,7 +11,7 @@ These playbooks require Ansible 1.2.
 
 These playbooks are meant to be a reference and starter's guide to building Ansible Playbooks. These playbooks were tested on CentOS 6.x so we recommend that you use CentOS or RHEL to test these modules.
 
-You can test this playbook on your local machine installing [Pipenv](https://github.com/pypa/pipenv), python package and virtualenv manager.
+You can test this playbook on your local machine installing [Docker](https://www.docker.com/) and [Pipenv](https://github.com/pypa/pipenv), python package and virtualenv manager.
 
 Once done, you just run the following commands:
 

@@ -3,27 +3,66 @@ version: 2
 
 CACHE_KEY: 'sample-v1-{{ checksum "Pipfile.lock" }}'
 
+DEFAULTS: &DEFAULTS
+  machine: true
+  environment:
+    PIPENV_VENV_IN_PROJECT: true
+  working_directory: ~/sample-playbook-for-ci-testing
+
+RESTORE_CACHE: &RESTORE_CACHE
+  restore_cache:
+    key: CACHE_KEY
+
+INSTALL_ANSIBLE_RELATED_PACKAGES: &INSTALL_ANSIBLE_RELATED_PACKAGES
+  run:
+    command: |
+      pip --version
+      pip install pipenv
+      pipenv sync
+
 jobs:
-  build:
-    machine: yes
-    working_directory: ~/sample-role-for-ci-testing
-    environment:
-      PIPENV_VENV_IN_PROJECT: true
+  test_playbook:
+    <<: *DEFAULTS
     steps:
       - checkout
+      - *RESTORE_CACHE
 
-      - restore_cache:
-          key: CACHE_KEY
-
-      - run:
-          command: |
-            pip install pipenv
-            pipenv sync
+      - *INSTALL_ANSIBLE_RELATED_PACKAGES
 
       - save_cache:
           key: CACHE_KEY
           paths:
-            - ".venv"
+            - .venv
+
+      - run: pipenv run test
+
+  test_common:
+    <<: *DEFAULTS
+    steps:
+      - checkout
+      - *RESTORE_CACHE
+
+      - *INSTALL_ANSIBLE_RELATED_PACKAGES
+
+      - save_cache:
+          key: CACHE_KEY
+          paths:
+            - .venv
 
       - run:
-          command: pipenv run test
+          command: |
+            cd roles/common
+            pipenv run test
+
+workflows:
+  version: 2
+  test_suites:
+    jobs:
+      - test_playbook:
+          filters:
+            branches:
+              ignore: /.\.tmp/
+      - test_common:
+          filters:
+            branches:
+              ignore: /.\.tmp/
