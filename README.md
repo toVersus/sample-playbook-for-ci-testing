@@ -1,7 +1,7 @@
 # Building a simple LAMP stack and deploying Application using Ansible Playbooks.
 
 [![CircleCI](https://circleci.com/gh/toVersus/sample-playbook-for-ci-testing.svg?style=svg)](https://circleci.com/gh/toVersus/sample-playbook-for-ci-testing)
-[![TravisCI](https://travis-ci.org/toVersus/sample-playbookfor-ci-testing.svg?branch=master)](https://travis-ci.org/toVersus/sample-playbookfor-ci-testing)
+[![TravisCI](https://travis-ci.org/toVersus/sample-playbook-for-ci-testing.svg?branch=master)](https://travis-ci.org/toVersus/sample-playbookfor-ci-testing)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/bagbu5l6qvvqtnso?svg=true)](https://ci.appveyor.com/project/toVersus/sample-playbookfor-ci-testing)
 [![Azure Pipelines](https://dev.azure.com/toversus/sample-role-for-ci-testing/_apis/build/status/toVersus.sample-playbook-for-ci-testing)](https://dev.azure.com/toversus/sample-role-for-ci-testing/_build/latest?definitionId=2)
 [![shippable](https://api.shippable.com/projects/5bf2d1d73038210700d6b38f/badge?branch=master)](https://app.shippable.com/github/toVersus/sample-playbook-for-ci-testing/dashboard)
