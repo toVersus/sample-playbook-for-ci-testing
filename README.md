@@ -22,6 +22,8 @@ $ pipenv sync
 $ pipenv run test
 ```
 
+![demo](./images/demo.gif)
+
 This LAMP stack can be on a single node or multiple nodes. The inventory file 'hosts' defines the nodes in which the stacks should be configured.
 
 ```ini
