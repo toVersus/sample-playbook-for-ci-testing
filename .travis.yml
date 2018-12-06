@@ -13,6 +13,9 @@ service:
 
 python: "2.7"
 
+stages:
+  - test
+
 env:
   - PIPENV_VERBOSITY=-1
 
@@ -24,5 +27,10 @@ before_install:
 install:
   - pipenv sync
 
-script:
-  - pipenv run test
+jobs:
+  include:
+    - stage: test
+      script:
+        - cd roles/common
+        - pipenv run test
+    - script: pipenv run test
