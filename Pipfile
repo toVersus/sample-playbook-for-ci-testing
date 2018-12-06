@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 ansible = "==2.7.4"
 molecule = { extras=['vagrant'], version="==2.19.0" }
-docker = "==3.5.1"
+docker = "==3.6.0"
 python-vagrant = "==0.5.15"
 
 [requires]
