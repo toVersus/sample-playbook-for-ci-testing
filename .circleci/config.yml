@@ -1,8 +1,6 @@
 ---
 version: 2
 
-CACHE_KEY: 'sample-v1-{{ checksum "Pipfile.lock" }}'
-
 DEFAULTS: &DEFAULTS
   machine: true
   environment:
@@ -11,7 +9,7 @@ DEFAULTS: &DEFAULTS
 
 RESTORE_CACHE: &RESTORE_CACHE
   restore_cache:
-    key: CACHE_KEY
+    key: 'sample-v1-{{ checksum "Pipfile.lock" }}'
 
 INSTALL_ANSIBLE_RELATED_PACKAGES: &INSTALL_ANSIBLE_RELATED_PACKAGES
   run:
@@ -30,7 +28,7 @@ jobs:
       - *INSTALL_ANSIBLE_RELATED_PACKAGES
 
       - save_cache:
-          key: CACHE_KEY
+          key: 'sample-v1-{{ checksum "Pipfile.lock" }}'
           paths:
             - .venv
 
