@@ -1,13 +1,26 @@
 ---
-pool:
-  vmImage: 'Ubuntu 16.04'
-
-steps:
+jobs:
+- job: common_role
+  steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '2.7'
       architecture: 'x64'
+  - script: |
+      cd ../
+      mv $(Build.SourcesDirectory) sample-role-for-ci-testing
+      cd sample-role-for-ci-testing
+      pip install pipenv
+      pipenv sync
+      cd roles/common
+      pipenv run test
 
+- job: playbook
+  steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '2.7'
+      architecture: 'x64'
   - script: |
       cd ../
       mv $(Build.SourcesDirectory) sample-role-for-ci-testing
