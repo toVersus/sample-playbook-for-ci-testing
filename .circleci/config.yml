@@ -1,22 +1,23 @@
 ---
 version: 2
 
-DEFAULTS: &DEFAULTS
-  machine: true
-  environment:
-    PIPENV_VENV_IN_PROJECT: true
-  working_directory: ~/sample-playbook-for-ci-testing
+anchors:
+  DEFAULTS: &DEFAULTS
+    machine: true
+    environment:
+      PIPENV_VENV_IN_PROJECT: true
+    working_directory: ~/sample-playbook-for-ci-testing
 
-RESTORE_CACHE: &RESTORE_CACHE
-  restore_cache:
-    key: 'sample-v1-{{ checksum "Pipfile.lock" }}'
+  RESTORE_CACHE: &RESTORE_CACHE
+    restore_cache:
+      key: 'sample-v1-{{ checksum "Pipfile.lock" }}'
 
-INSTALL_ANSIBLE_RELATED_PACKAGES: &INSTALL_ANSIBLE_RELATED_PACKAGES
-  run:
-    command: |
-      pip --version
-      pip install pipenv
-      pipenv sync
+  INSTALL_ANSIBLE_RELATED_PACKAGES: &INSTALL_ANSIBLE_RELATED_PACKAGES
+    run:
+      command: |
+        pip --version
+        pip install pipenv
+        pipenv sync
 
 jobs:
   test_playbook:
