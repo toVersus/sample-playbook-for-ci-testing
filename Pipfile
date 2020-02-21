@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 ansible = "==2.9.5"
-molecule = { extras=['vagrant'], version="==2.22" }
+molecule = { extras=['vagrant'], version="==3.0.1" }
 docker = "==3.7.2"
 python-vagrant = "==0.5.15"
 
